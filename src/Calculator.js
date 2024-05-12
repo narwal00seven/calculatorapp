@@ -18,17 +18,16 @@ export default function Calculator() {
     if (input.slice(-1) === value || input.slice(-1) === "=") {
       setInput(input.slice(0, -1));
     }
-    const lastChar = input.slice(-1);
-    if (["+", "-", "*", "/"].includes(lastChar)) {
-      setInput(input.slice(0, -1) + value);
-    } else {
-      setInput(input + value);
-    }
+    setInput(input + value);
   };
 
   const handleEqual = () => {
+    if (input === "") {
+      setOutput("Error");
+      return;
+    }
     try {
-      const result =eval(input.replace(/x/g, "*").replace(/÷/g, "/"));
+      const result = eval(input.replace(/x/g, "*").replace(/÷/g, "/"));
       setOutput(result);
     } catch (error) {
       setOutput("Error");
