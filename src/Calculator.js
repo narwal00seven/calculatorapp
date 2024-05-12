@@ -18,7 +18,12 @@ export default function Calculator() {
     if (input.slice(-1) === value || input.slice(-1) === "=") {
       setInput(input.slice(0, -1));
     }
-    setInput(input + value);
+    const lastChar = input.slice(-1);
+    if (["+", "-", "*", "/"].includes(lastChar)) {
+      setInput(input.slice(0, -1) + value);
+    } else {
+      setInput(input + value);
+    }
   };
 
   const handleEqual = () => {
